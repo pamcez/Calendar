@@ -19,7 +19,6 @@
 
 </head>
 <body>
-<!-- TO DO: FIX THE MONTH OF MAY!!! -->
 
 	<?php 
 
@@ -40,7 +39,7 @@
 		// loop the table of months
 		
 		echo '<ul class=calendar>';
-			for ($section=1; $section<=12; $section++) {
+		for ($section=1; $section<=12; $section++) {
 				echo '<li">';
 				$month++;
 
@@ -49,39 +48,31 @@
 			echo '<section>';
 			echo '<li class="title">'.$months[$month-1].'</li>';
 			echo '<li class="day-header">';
+				echo '<div class="large-1 day">Sunday</div>';
 				echo '<div class="large-1 day">Monday</div>';
 				echo '<div class="large-1 day">Tuesday</div>';
 				echo '<div class="large-1 day">Wednesday</div>';
 				echo '<div class="large-1 day">Thursday</div>';
 				echo '<div class="large-1 day">Friday</div>';
-				echo '<div class="large-1 day">Saturday</div>';
-				echo '<div class="large-1 day">Sunday</div>';	
+				echo '<div class="large-1 day">Saturday</div>';					
 			echo '</li>';
 
 			$first_day_in_month=date('w',mktime(0,0,0,$month,1,$current_year));// gets the first Monday of current month
 			$month_days=date('t',mktime(0,0,0,$month,1,$current_year));// gets number of days of current month
 			
 			echo '<li class="week">';
-			// in PHP, Sunday is the first day in the week with number zero (0)
-			// to make our calendar works we will change this to (7)
-			if ($first_day_in_month==0){
-				$first_day_in_month=7;
-			} else {
+			
 				
 				//print out blank cells
-				for($i=1; $i<$first_day_in_month; $i++) {
+				for($i=1; $i<=$first_day_in_month; $i++) {
 					echo '<div class="large-1 day"> </div>';
-				}
-			}
-
-			
+			 	}
 			//print days of the month
-			//loops through days from 1-31
+			//loops through days from 1-31 or 1-30
 			
 			for($day=1; $day<=$month_days; $day++) {
-				$pos=($day+$first_day_in_month-1)%7;
+				$pos=($first_day_in_month)%7;
 				echo '<div class="large-1 day">'.$day.'</div>';
-				// if ($pos==6) echo '<div class="large-1 day"></div>';
 			}	
 			echo '</section>'; //close title or month
 			echo '</li>';
